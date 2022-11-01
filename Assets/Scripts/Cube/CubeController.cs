@@ -6,32 +6,21 @@ using UnityEngine.AI;
 public class CubeController : MonoBehaviour
 {
     [SerializeField] private Transform _targetDestination;
-    [SerializeField] private RandomizePath _pathRandomizer;
-    private NavMeshAgent agent;
-    private Vector3 startPosition;
+    [SerializeField] private EventController _controller;
+    private NavMeshAgent _agent;
 
     // Start is called before the first frame update
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        startPosition = gameObject.transform.position;
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     private void FixedUpdate()
     {
-        agent.SetDestination(_targetDestination.position);
+        _agent.SetDestination(_targetDestination.position);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (tag == "YellowCube")
-        {
-            _pathRandomizer.RandomizeYellowPath();
-        }
-        else
-        {
-            _pathRandomizer.RandomizeGreenPath();
-        }
-        gameObject.transform.position = startPosition;
+        _controller.CubeArrived();
     }
-
 }

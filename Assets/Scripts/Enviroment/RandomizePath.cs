@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class RandomizePath : MonoBehaviour
 {
-    [SerializeField] private GameObject _greenTarget;
-    [SerializeField] private GameObject _yellowTarget;
-    [SerializeField] private GameObject _greenObstacle;
-    [SerializeField] private GameObject _yellowObstacle;
+    [SerializeField] private GameObject _target;
+    [SerializeField] private GameObject _obstacle;
     // Start is called before the first frame update
     void Start()
     {
-        RandomizeYellowPath();
-        RandomizeGreenPath();
+        RandomizePathLength();
     }
 
     // Update is called once per frame
@@ -21,27 +18,15 @@ public class RandomizePath : MonoBehaviour
         
     }
 
-    public void RandomizeYellowPath()
+    public void RandomizePathLength()
     {
         float x = Random.Range(0, 10);
-        float z = Random.Range(2.5f, -7);
-        _yellowTarget.transform.position = new Vector3(x, 0, z);
+        float z = Random.Range(-7, 20);
+        _target.transform.position = new Vector3(x, 0, z);
+        _target.transform.GetChild(0).GetChild(0).gameObject.isStatic = true;
 
-        x = _yellowTarget.transform.position.x - Random.Range(3, 7);
-        z = _yellowTarget.transform.position.z - Random.Range(3, 7);
-        _yellowObstacle.transform.position = new Vector3(x, 0, z);
-    }
-
-    public void RandomizeGreenPath()
-    {
-        float x = Random.Range(0, 10);
-        float z = Random.Range(8.4f, 20);
-        _greenTarget.transform.position = new Vector3(x, 0, z);
-
-        x = _greenTarget.transform.position.x - Random.Range(3, 7);
-        z = _greenTarget.transform.position.z - Random.Range(3, 7);
-        _greenObstacle.transform.position = new Vector3(x, 0, z);
-    }
-
-    
+        x = _target.transform.position.x - Random.Range(3, 7);
+        z = _target.transform.position.z - Random.Range(3, 7);
+        _obstacle.transform.position = new Vector3(x, 0, z);
+    }    
 }
