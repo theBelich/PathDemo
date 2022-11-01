@@ -29,9 +29,9 @@ public class GameController : MonoBehaviour
             {
                 var a = Instantiate(_greenSurfacePrefab, hit.point, Quaternion.identity);
                 a.transform.SetParent(_surfaceParent);
-                GameObjectUtility.SetNavMeshArea(a, 0);
                 BuildNavMeshes();
             }
+            return;
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -43,9 +43,9 @@ public class GameController : MonoBehaviour
             {
                 var a = Instantiate(_yellowSurfacePrefab, hit.point, Quaternion.identity);
                 a.transform.SetParent(_surfaceParent);
-                GameObjectUtility.SetNavMeshArea(a, 30);
                 BuildNavMeshes();
             }
+            return;
         }
     }
 

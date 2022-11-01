@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class CubeController : MonoBehaviour
 {
     [SerializeField] private Transform _targetDestination;
-    [SerializeField] private RandomizePath _controller;
+    [SerializeField] private RandomizePath _pathRandomizer;
     private NavMeshAgent agent;
     private Vector3 startPosition;
 
@@ -23,8 +23,15 @@ public class CubeController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        _controller.RandomizePathLength();
-        gameObject.transform. position = startPosition;
+        if (tag == "YellowCube")
+        {
+            _pathRandomizer.RandomizeYellowPath();
+        }
+        else
+        {
+            _pathRandomizer.RandomizeGreenPath();
+        }
+        gameObject.transform.position = startPosition;
     }
 
 }
