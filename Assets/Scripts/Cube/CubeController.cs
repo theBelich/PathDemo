@@ -9,15 +9,13 @@ public class CubeController : MonoBehaviour
     private NavMeshAgent agent;
 
     // Start is called before the first frame update
-    private void OnEnable()
+    private void Start()
     {
-        StartCoroutine(LateStart());
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    private IEnumerator LateStart()
+    private void FixedUpdate()
     {
-        yield return new WaitForSeconds(0.1f);
-        agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(_targetDestination.position);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor.AI;
+using UnityEditor;
 
 public class GameController : MonoBehaviour
 {
@@ -28,14 +29,24 @@ public class GameController : MonoBehaviour
             {
                 var a = Instantiate(_greenSurfacePrefab, hit.point, Quaternion.identity);
                 a.transform.SetParent(_surfaceParent);
+                GameObjectUtility.SetNavMeshArea(a, 0);
                 BuildNavMeshes();
             }
         }
-    }
 
-    public void RandomizeLevel()
-    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            if (Physics.Raycast(ray, out hit))
+            {
+                var a = Instantiate(_yellowSurfacePrefab, hit.point, Quaternion.identity);
+                a.transform.SetParent(_surfaceParent);
+                GameObjectUtility.SetNavMeshArea(a, 30);
+                BuildNavMeshes();
+            }
+        }
     }
 
     private void BuildNavMeshes()
